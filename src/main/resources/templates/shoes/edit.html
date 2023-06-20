@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<th:block th:replace="~{layout::header}"></th:block>
+<title>Edit Shoes - Norda Shop</title>
+<body>
+<div class="container">
+  <h1>Edit Shoes</h1>
+  <form th:action="@{/shoes/save}" th:object="${shoes}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}">
+    <div class="col-6 mb-3">
+      <label class="form-label" for="name">Name:</label>
+      <input class="form-control" type="text" th:field="*{name}" id="name" required autofocus>
+      <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="description">Description:</label>
+      <input class="form-control" type="text" th:field="*{description}" id="description" required autofocus>
+      <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="price">Price:</label>
+      <input class="form-control" type="text" th:field="*{price}" id="price" required>
+      <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+    </div>
+    <div class="col-6 mb-3">
+      <label class="form-label" for="category">Category:</label><span class="text-danger">*</span>
+      <select class="form-control" id="category" name="category.id">
+        <option value="">-- Select Category --</option>
+        <option th:each="category : ${categories}" th:value="${category.getId()}"
+                th:text="${category.getName()}"
+                th:selected="${category.getId() == shoes.category.getId()}"></option>
+      </select>
+    </div>
+    <div class="col-6 mb-3"><img class="img-thumbnail" th:src="@{${shoes.photosImagePath}}" width="150" height="250px" /></div>
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">Photos:</label> <input
+            class="form-control" type="file" name="image"
+            accept="image/png, image/jpeg" />
+    </div>
+    <div class="col-6 mb-3">
+      <input type="submit" class="btn btn-danger" value="Save" />
+  </div>
+  </form>
+  <br>
+  <button class="btn btn-primary" th:href="@{/shoes}">Back to List</button>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+</html>

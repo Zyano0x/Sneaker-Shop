@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not Found</title>
+</head>
+<body>
+<th:block th:replace="~{layout :: header}"></th:block>
+<div class="error-area height-100vh" style="background-image:url(/css/images/bg/error.png);">
+    <div class="container-fluid p-0 height-100vh">
+        <div class="row no-gutters align-items-center height-100vh">
+            <div class="col-lg-12">
+                <div class="error-content text-center">
+                    <h1>404</h1>
+                    <h3>Page Cannot Be Found!</h3>
+                    <div class="error-btn btn-hover">
+                        <a class="bg-black-hover" href="/">Back to home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{layout :: footer}"></th:block>
+</body>
+</html>
+

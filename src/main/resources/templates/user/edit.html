@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="~{layout::header}"></th:block>
+<title>Edit User - Norda Shop</title>
+<body>
+<div align="center" class="container">
+  <br />
+  <form th:action="@{/users/save}" th:object="${user}" method="post">
+    <input type="hidden" th:field="*{id}">
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">User Name:</label> <input
+            class="form-control" type="text" th:field="*{name}" />
+    </div>
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">User Name:</label> <input
+            class="form-control" type="text" th:field="*{username}" />
+    </div>
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">Email:</label> <input
+            class="form-control" type="text" th:field="*{email}" />
+    </div>
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">Password:</label> <input
+            class="form-control" type="password" th:field="*{password}" />
+    </div>
+    <div class="col-6 mb-3">
+      <label class="col-sm-2 col-form-label">Enable:</label> <input
+            class="form-check" type="checkbox" th:field="*{enabled}" />
+    </div>
+    <div class="form-check">
+      <label class="col-sm-2 col-form-label">Roles:
+      </label>
+      <input
+              type="checkbox" name="role" class="" style="margin-left: 30px;"  th:field="*{roles}"
+              th:each="role : ${listRoles}"
+              th:text="${role.name}" th:value="${role.id}" />
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+  </form>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        lang="en">
+<th:block th:replace="~{layout::header}"></th:block>
+<title>User List - Norda Shop</title>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <nav class="navbar navbar-light">
+        <div class="container-fluid">
+          <form class="d-flex" th:action="@{/users/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
+            Search: <input class="form-control me-2" type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
+            <input class="btn btn-success" type="submit" value="Search"/> &nbsp;
+          </form>
+        </div>
+      </nav>
+    </div>
+  </div>
+  <table border="1" class="table table-striped table table-hover table-bordered">
+    <thead>
+    <tr>
+      <th><a th:href="@{'/users/page/' + ${currentPage} + '?sortField=id&sortType=' + ${reverseSortType}}">ID</a></th>
+      <th><a th:href="@{'/users/page/' + ${currentPage} + '?sortField=title&sortType=' + ${reverseSortType}}">Name</a></th>
+      <th><a th:href="@{'/users/page/' + ${currentPage} + '?sortField=price&sortType=' + ${reverseSortType}}">Price</a></th>
+      <th><a th:href="@{'/users/page/' + ${currentPage} + '?sortField=category&sortType=' + ${reverseSortType}}">Category</a></th>
+      <th><a th:href="@{'/users/page/' + ${currentPage} + '?sortField=category&sortType=' + ${reverseSortType}}">IMG</a></th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+      <td th:text="${user.id}">ID</td>
+      <td th:text="${user.name}">Name</td>
+      <td th:text="${user.email}">Email</td>
+      <td th:text="${user.username}">Username</td>
+      <td th:text="${user.enabled}">Enabled</td>
+      <td>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
+          <a class="btn btn-warning" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div>
+    <h5>Total Users: [[${totalItems}]]</h5>
+  </div>
+</div>
+
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center pagination-sm" th:each="i : ${#numbers.sequence(1, totalPages)}">
+    <li class="page-item" th:classappend="${currentPage == i} ? 'active'">
+      <a class="page-link" th:href="@{/users(pageNo=${i})}" th:text="${i}"></a>
+    </li>
+  </ul>
+</nav>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+</html>
