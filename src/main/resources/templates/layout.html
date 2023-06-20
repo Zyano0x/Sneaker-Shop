@@ -130,15 +130,15 @@
                     <li><a href="" >CONTACT </a></li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}"
                         th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/users" sec:authorize="hasAnyAuthority('ADMIN')">User Manage</a>
+                      <a href="/users" sec:authorize="hasAnyAuthority('ADMIN')">USER MANAGE</a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}"
                         th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/shoes" sec:authorize="hasAnyAuthority('ADMIN')">Shoes Manage</a>
+                      <a href="/shoes" sec:authorize="hasAnyAuthority('ADMIN')">SHOES MANAGE</a>
                     </li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}"
                         th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/categories" sec:authorize="hasAnyAuthority('ADMIN')">Category Manage</a>
+                      <a href="/categories" sec:authorize="hasAnyAuthority('ADMIN')">CATEGORY MANAGE</a>
                     </li>
                   </ul>
                 </nav>
