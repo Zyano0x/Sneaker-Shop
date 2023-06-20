@@ -22,7 +22,6 @@ public class ShoesService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         return shoesRepository.findAll(pageable);
     }
-
     public  List<Shoes> getAllShoes() {
         return shoesRepository.findAll();
     }
@@ -37,6 +36,7 @@ public class ShoesService {
         return shoesRepository.findWithOutDelete(pageable);
 
     }
+
     public Shoes getShoesById(Long id){
         return  shoesRepository.findById(id).orElse(null);
     }

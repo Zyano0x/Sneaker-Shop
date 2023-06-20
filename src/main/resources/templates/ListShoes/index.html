@@ -85,44 +85,24 @@
                                         <div class="single-product-wrap mb-35">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
-                                                    <img alt="" th:src="@{${shoes.photosImagePath}}" width="270" height="324">
+                                                    <img alt="" th:src="@{${shoes.photosImagePath}}" th:width="300" th:height="300">
                                                 </a>
                                                 <div class="product-action-2 tooltip-style-2">
                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
-                                                    <button title="Quick View" data-toggle="modal" data-target="#exampleModal"><i class="icon-size-fullscreen icons"></i></button>
-                                                    <button title="Compare"><i class="icon-refresh"></i></button>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
-                                                <div class="product-rating-wrap">
-                                                    <div class="product-rating">
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star gray"></i>
-                                                    </div>
-                                                    <span>(2)</span>
-                                                </div>
+
                                                 <h3><a href="" th:text="${shoes.name}"></a></h3>
                                                 <div class="product-price-2">
                                                     <span th:text="'$' + ${shoes.price}"></span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-position text-center">
-                                                <div class="product-rating-wrap">
-                                                    <div class="product-rating">
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star"></i>
-                                                        <i class="icon_star gray"></i>
-                                                    </div>
-                                                    <span>(2)</span>
-                                                </div>
-                                                <h3><a href="product-details.html">Basic Joggin Shorts</a></h3>
+
+                                                <h3><a href="" th:text="${shoes.name}"></a></h3>
                                                 <div class="product-price-2">
-                                                    <span>$20.50</span>
+                                                    <span th:text="'$' + ${shoes.price}"></span>
                                                 </div>
                                                 <div class="pro-add-to-cart">
                                                     <button title="Add to Cart">Add To Cart</button>
@@ -153,7 +133,7 @@
                         <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
                             <h4 class="sidebar-widget-title">Price Filter </h4>
                             <div class="price-filter">
-                                <span>Range:  $100.00 - 1.300.00 </span>
+                                <span>Range:  $100 - $2000 </span>
                                 <div id="slider-range"></div>
                                 <div class="price-slider-amount">
                                     <div class="label-input">
