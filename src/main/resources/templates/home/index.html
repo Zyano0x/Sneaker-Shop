@@ -5,47 +5,7 @@
 <body>
 <div class="main-wrapper">
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="/css/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Simple Black T-Shirt</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="/css/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Norda Backpack</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$170.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <th:block th:replace="~{layout::sidebar-cart}"></th:block>-->
     <!-- Mobile menu start -->
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="clickalbe-sidebar-wrap">
@@ -212,7 +172,12 @@
                                         <span th:text="'$' + ${shoes.price}"></span>
                                     </div>
                                     <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                        <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                            <input type="hidden" name="shoesId" id="shoesId" th:value="${shoes.getId()}">
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
+                                                Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +207,14 @@
                                         <span th:text="'$' + ${shoess.price}"></span>
                                     </div>
                                     <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                        <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                            <input type="hidden" name="id" th:value="${shoess.getId()}">
+                                            <input type="hidden" name="name" th:value="${shoess.getName()}">
+                                            <input type="hidden" name="price" th:value="${shoess.getPrice()}">
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
+                                                Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +244,14 @@
                                         <span th:text="'$' + ${shoess.price}"></span>
                                     </div>
                                     <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                        <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                            <input type="hidden" name="id" th:value="${shoess.getId()}">
+                                            <input type="hidden" name="name" th:value="${shoess.getName()}">
+                                            <input type="hidden" name="price" th:value="${shoess.getPrice()}">
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
+                                                Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

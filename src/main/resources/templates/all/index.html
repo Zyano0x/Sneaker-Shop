@@ -121,7 +121,7 @@
                         <div class="sidebar-widget mb-40">
                             <h4 class="sidebar-widget-title">Search </h4>
                             <div class="sidebar-search">
-                                <form class="sidebar-search-form" th:action="@{/ListShoes/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
+                                <form class="sidebar-search-form" th:action="@{/templates/all/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
                                     <input class="form-control me-2" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
                                     <button>
 
@@ -135,10 +135,10 @@
                             <div class="sidebar-widget shop-catigory">
                                 <ul>
                                     <li>
-                                        <a th:href="@{/ListShoes/page/1}">All</a>
+                                        <a th:href="@{/templates/all/page/1}">All</a>
                                     </li>
                                     <li th:each="category : ${categories}">
-                                        <a th:href="@{/ListShoes/page/1(category=${category.id})}" th:text="${category.name}"></a>
+                                        <a th:href="@{/templates/all/page/1(category=${category.id})}" th:text="${category.name}"></a>
                                     </li>
                                 </ul>
                             </div>

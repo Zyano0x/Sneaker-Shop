@@ -1,6 +1,8 @@
 package com.example.sneaker_shop.Controllers;
 
+import com.example.sneaker_shop.Daos.Item;
 import com.example.sneaker_shop.Entities.Shoes;
+import com.example.sneaker_shop.Services.CartService;
 import com.example.sneaker_shop.Services.ShoesService;
 import com.example.sneaker_shop.Services.CategoryService;
 import com.example.sneaker_shop.Utils.FileUpload;
@@ -27,6 +29,8 @@ public class ShoesController {
     private ShoesService shoesService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping
     public String viewHomePage(Model model) {
@@ -111,5 +115,16 @@ public class ShoesController {
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("shoes", shoes);
         return "shoes/detail";
+    }
+
+    @PostMapping("/add-to-cart")
+    public String addToCart(HttpSession session,
+                            @RequestParam Long shoesId,
+                            @RequestParam(defaultValue = "1") int quantity) {
+        Shoes shoes = shoesService.getShoesById(shoesId);
+        var cart = cartService.getCart(session);
+        cart.addItems(new Item(shoes, quantity));
+        cartService.updateCart(session, cart);
+        return "redirect:/cart";
     }
 }

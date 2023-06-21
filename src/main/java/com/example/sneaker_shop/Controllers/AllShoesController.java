@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Controller
 @RequestMapping("/all")
-public class ListShoesController {
+public class AllShoesController {
     @Autowired
     private ShoesService shoesService;
     @Autowired
