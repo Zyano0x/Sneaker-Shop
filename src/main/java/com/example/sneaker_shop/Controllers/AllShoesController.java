@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 @Controller
-@RequestMapping("/ListShoes")
+@RequestMapping("/all")
 public class ListShoesController {
     @Autowired
     private ShoesService shoesService;
@@ -56,7 +56,7 @@ public class ListShoesController {
         }
 
         if (page.getTotalPages() == 0) {
-            return "redirect:/ListShoes/page/1";
+            return "redirect:/all/page/1";
         }
 
         model.addAttribute("currentPage", pageNum);
@@ -69,7 +69,7 @@ public class ListShoesController {
         model.addAttribute("shoes", listShoes);
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        return "ListShoes/index";
+        return "all/index";
     }
 
     private List<Shoes> filterShoesByCategory(List<Shoes> shoes, Category category, String keyword) {
