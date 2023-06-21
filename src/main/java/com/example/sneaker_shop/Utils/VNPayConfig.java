@@ -11,12 +11,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-@Component
 public class VNPayConfig {
+    public static String vnp_Version = "2.1.0";
+    public static String vnp_Command = "pay";
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
     public static String vnp_Returnurl = "/order/return-status";
-    public static String vnp_TmnCode = "5QAMRU7X";
-    public static String vnp_HashSecret = "MRXPLCPWFYSCCGCGVORLXVZVWMMUXPOK";
+    public static String vnp_TmnCode = "UWJ65IYZ";
+    public static String vnp_HashSecret = "EFERLQBCZRKRLBSXWJRIQCMYXTHGOOBK";
     public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";
 
     public static String md5(String message) {

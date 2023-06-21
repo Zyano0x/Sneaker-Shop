@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -21,17 +22,17 @@ public class OrderController {
     @Autowired
     private CartService cartService;
 
-    @GetMapping("/submit")
-    public String submitOrder(@RequestParam("amount") long amount,
+    @PostMapping("/submit")
+    public String submitOrder(@RequestParam("amount") long total,
                               HttpServletRequest request,
                               HttpSession session) throws UnsupportedEncodingException {
         String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
-        String vnpayUrl = vnPayService.createOrder(request, amount, baseUrl);
+        String vnpayUrl = vnPayService.createOrder(request, total, baseUrl);
         return "redirect:" + vnpayUrl;
     }
 
     @GetMapping("/return-status")
-    public String GetMapping(HttpServletRequest request, Model model){
+    public String GetMapping(HttpServletRequest request, HttpSession session, Model model){
         int paymentStatus = vnPayService.orderReturn(request);
 
         String orderInfo = request.getParameter("vnp_OrderInfo");
@@ -45,7 +46,7 @@ public class OrderController {
         model.addAttribute("transactionId", transactionId);
 
         if (paymentStatus == 1) {
-            cartService.saveCart(request.getSession());
+            cartService.saveCart(session);
             return "order/success";
         }
         else {

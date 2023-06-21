@@ -19,7 +19,7 @@ public class ItemInvoice {
     private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "book_id", referencedColumnName = "id")
+    @JoinColumn(name = "shoes_id", referencedColumnName = "id")
     @ToString.Exclude
     private Shoes shoes;
 

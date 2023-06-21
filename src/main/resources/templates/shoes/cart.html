@@ -76,8 +76,11 @@
                   <h4 class="cart-bottom-title section-bg-gary-cart">Cart Total</h4>
                 </div>
                 <h5>Total products <span th:text="'$' + ${totalPrice}"></span></h5>
-<!--                  <a th:href="@{/order/submit(amount=${totalPrice.intValue()})}">Proceed to Checkout</a>-->
-                  <a th:href="@{/cart/checkout}">Proceed to Checkout</a>
+                  <form id="checkoutForm" th:action="@{/order/submit}" method="post">
+                      <input type="hidden" name="amount" th:value="${totalPrice.longValue()}" />
+                      <a href="#" onclick="submitForm()">Proceed to Checkout</a>
+                  </form>
+<!--                  <a th:href="@{/cart/checkout}">Proceed to Checkout</a>-->
               </div>
             </div>
           </div>
@@ -120,5 +123,10 @@
 <script th:src="@{/js/plugins/ajax-mail.js}"></script>
 <script th:src="@{/js/main.js}"></script>
 <script th:src="@{/js/cart.js}"></script>
+<script>
+    function submitForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
 </body>
 </html>
