@@ -14,21 +14,28 @@ import java.util.List;
 
 @Service
 public class ShoesService {
-    int pageSize = 20;
+    int pageSize = 10;
 
     @Autowired
     private IShoesRepository shoesRepository;
 
-    public Page<Shoes> getAllShoes(int pageNum) {
-        Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
-        return shoesRepository.findAll(pageable);
-    }
     public  List<Shoes> getAllShoes() {
         return shoesRepository.findAll();
     }
 
     public Page<Shoes> listAllWithOutDelete(int pageNum, String sortField, String sortType, String keyword) {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize,
+                sortType.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
+        System.out.println(keyword);
+        if (keyword != null) {
+            return shoesRepository.Search(pageable, keyword);
+        }
+        return shoesRepository.findWithOutDelete(pageable);
+
+    }
+
+    public Page<Shoes> listAllShoes(int pageNum, String sortField, String sortType, String keyword) {
+        Pageable pageable = PageRequest.of(pageNum - 1, 12,
                 sortType.equals("asc") ? Sort.by(sortField).ascending() : Sort.by(sortField).descending());
         System.out.println(keyword);
         if (keyword != null) {

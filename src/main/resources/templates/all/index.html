@@ -51,7 +51,7 @@
             </div>
         </div>
     </div>
-    <div class="shop-area pt-120 pb-120">
+    <div class="shop-area pt-120 pb-50">
         <div class="container">
             <div class="row flex-row-reverse">
                 <div class="col-lg-9">
@@ -125,7 +125,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-3">
                     <div class="sidebar-wrapper sidebar-wrapper-mrg-right">
                         <div class="sidebar-widget mb-40">
@@ -153,21 +152,6 @@
                                 </ul>
                             </div>
                         </div>
-
-
-                     <!--   <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Price Filter</h4>
-                            <div class="price-filter">
-                                <span>Range: $100 - $2000</span>
-                                <div id="slider-range"></div>
-                                <div class="price-slider-amount">
-                                    <div class="label-input">
-                                        <input type="text" id="amount" name="price" placeholder="Add Your Price" />
-                                    </div>
-                                    <button type="button" onclick="applyPriceFilter()">Filter</button>
-                                </div>
-                            </div>
-                        </div>-->
                     </div>
                 </div>
             </div>
@@ -176,15 +160,15 @@
 </div>
 <div class="pro-pagination-style text-center mt-10">
     <ul>
-        <li th:class="${currentPage == 1} ? 'disabled'">
-            <a class="prev" th:href="${currentPage > 1} ? @{/all(pageNo=${currentPage - 1})} : '#'"><i class="icon-arrow-left"></i></a>
+        <li th:class="${currentPage == 1}? 'disabled'">
+            <a class="prev" th:href="${currentPage > 1} ? @{/all/page/{pageNum}(pageNum=${currentPage - 1})} : '#'"><i class="icon-arrow-left"></i></a>
         </li>
         <li th:each="i : ${#numbers.sequence(1, totalPages)}">
-            <a class="active" th:if="${currentPage == i}" th:text="${i}" th:href="@{/all(pageNo=${i})}"></a>
-            <a th:unless="${currentPage == i}" th:text="${i}" th:href="@{/all(pageNo=${i})}"></a>
+            <a class="active" th:if="${currentPage == i}" th:text="${i}" th:href="@{/all/page/{pageNum}(pageNum=${i})}"></a>
+            <a th:unless="${currentPage == i}" th:text="${i}" th:href="@{/all/page/{pageNum}(pageNum=${i})}"></a>
         </li>
-        <li th:class="${currentPage == totalPages} ? 'disabled'">
-            <a class="next" th:href="${currentPage < totalPages} ? @{/all(pageNo=${currentPage + 1})} : '#'"><i class="icon-arrow-right"></i></a>
+        <li th:class="${currentPage == totalPages}? 'disabled'">
+            <a class="next" th:href="${currentPage < totalPages} ? @{/all/page/{pageNum}(pageNum=${currentPage + 1})} : '#'"><i class="icon-arrow-right"></i></a>
         </li>
     </ul>
 </div>
@@ -208,11 +192,11 @@
 <script th:src="@{/js/plugins/easyzoom.js}"></script>
 <script th:src="@{/js/plugins/scrollup.js}"></script>
 <script th:src="@{/js/plugins/ajax-mail.js}"></script>
-
-<!-- Use the minified version files listed below for better performance and remove the files listed above
-<script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script>  -->
-<!-- Main JS -->
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submitForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
 </body>
 </html>

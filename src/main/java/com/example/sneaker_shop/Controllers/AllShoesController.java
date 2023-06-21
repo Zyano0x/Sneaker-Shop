@@ -55,7 +55,7 @@ public class AllShoesController {
             listShoes = filterShoesByCategory(allShoes, category, keyword);
             page = createPageFromList(listShoes, pageNum);
         } else {
-            page = shoesService.listAllWithOutDelete(pageNum, sortField, sortType, keyword);
+            page = shoesService.listAllShoes(pageNum, sortField, sortType, keyword);
             listShoes = page.getContent();
         }
 

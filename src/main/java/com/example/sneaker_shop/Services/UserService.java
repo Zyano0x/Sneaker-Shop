@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 public class UserService {
-    int pageSize = 20;
+    int pageSize = 5;
 
     @Autowired
     private IUserRepository userRepository;

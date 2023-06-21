@@ -139,7 +139,7 @@
                         <div class="cart-title">
                             <h4><a th:href="@{'/shoes/detail/' + ${items.shoes.id}}" th:text="${items.shoes.name}"></a>
                             </h4>
-                            <span>1</span>
+                            <span th:text="${items.getQuantity()}"></span>
                             <span> × </span>
                             <span th:text="'$' + ${items.shoes.price}"></span>
                         </div>
@@ -153,7 +153,11 @@
                 </div>
                 <div class="cart-checkout-btn">
                     <a class="btn-hover cart-btn-style" th:href="@{/cart}">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="#">checkout</a>
+                    <form id="checkoutForm" th:action="@{/order/submit}" method="post">
+                        <input type="hidden" name="amount" th:value="${totalPrice.longValue()}" />
+                        <a href="#" onclick="submitForm()">Proceed to Checkout</a>
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -234,11 +238,11 @@
 <script th:src="@{/js/plugins/easyzoom.js}"></script>
 <script th:src="@{/js/plugins/scrollup.js}"></script>
 <script th:src="@{/js/plugins/ajax-mail.js}"></script>
-
-<!-- Use the minified version files listed below for better performance and remove the files listed above
-<script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script>  -->
-<!-- Main JS -->
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submitForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
 </body>
 </html>

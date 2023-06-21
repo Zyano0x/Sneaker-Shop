@@ -16,7 +16,7 @@ public class Shoes {
 
     @Column(name="name")
     @NotEmpty(message = "Name must not be empty")
-    @Size(max = 50,min =1, message = "Name must be less than 50 characters")
+    @Size(max = 255,min = 1, message = "Name must be less than 50 characters")
     private String name;
 
     @Column(name = "price")
