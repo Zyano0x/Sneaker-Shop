@@ -57,14 +57,20 @@
     <h5>Total Users: [[${totalItems}]]</h5>
   </div>
 </div>
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center pagination-sm" th:each="i : ${#numbers.sequence(1, totalPages)}">
-    <li class="page-item" th:classappend="${currentPage == i} ? 'active'">
-      <a class="page-link" th:href="@{/users(pageNo=${i})}" th:text="${i}"></a>
+<div class="pro-pagination-style text-center mt-10">
+  <ul>
+    <li th:class="${currentPage == 1}? 'disabled'">
+      <a class="prev" th:href="${currentPage > 1} ? @{/users/page/{pageNum}(pageNum=${currentPage - 1})} : '#'"><i class="icon-arrow-left"></i></a>
+    </li>
+    <li th:each="i : ${#numbers.sequence(1, totalPages)}">
+      <a class="active" th:if="${currentPage == i}" th:text="${i}" th:href="@{/users/page/{pageNum}(pageNum=${i})}"></a>
+      <a th:unless="${currentPage == i}" th:text="${i}" th:href="@{/users/page/{pageNum}(pageNum=${i})}"></a>
+    </li>
+    <li th:class="${currentPage == totalPages}? 'disabled'">
+      <a class="next" th:href="${currentPage < totalPages} ? @{/users/page/{pageNum}(pageNum=${currentPage + 1})} : '#'"><i class="icon-arrow-right"></i></a>
     </li>
   </ul>
-</nav>
+</div>
 <th:block th:replace="~{layout::footer}"></th:block>
 </body>
 </html>

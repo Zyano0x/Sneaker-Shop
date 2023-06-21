@@ -5,47 +5,7 @@
 <body>
 <div class="main-wrapper">
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="/css/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Simple Black T-Shirt</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="/css/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Norda Backpack</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$170.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <th:block th:replace="~{layout::sidebar-cart}"></th:block>
     <!-- Mobile menu start -->
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="clickalbe-sidebar-wrap">
@@ -182,18 +142,20 @@
             </div>
             <div class="tab-btn-wrap mb-40">
                 <div class="tab-style-2 nav">
-                    <a class="active" href="#product-1" data-toggle="tab">All Products</a>
-                    <a href="#product-2" data-toggle="tab">Running</a>
-                    <a href="#product-3" data-toggle="tab">Lifestyle</a>
+                    <a class="active" href="#product-0" data-toggle="tab">All Products</a>
+                    <th:block th:each="category : ${categories}">
+                        <a th:href="@{'#product-' + ${category.id}}" data-toggle="tab" th:text="${category.name}"></a>
+                    </th:block>
                 </div>
                 <div class="btn-style-2">
-                    <a class="animated" href="">see all product <i class="icon-arrow-right"></i></a>
+                    <a class="animated" th:href="@{/all}">see all product <i class="icon-arrow-right"></i></a>
                 </div>
             </div>
             <div class="tab-content jump">
-                <div id="product-1" class="tab-pane active">
+                <div id="product-0" class="tab-pane active">
                     <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoes:${shoes}">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoes, iterStat : ${shoes}" th:if="${iterStat.count} &lt;= 12">
+                            <!-- Shoe Card HTML -->
                             <div class="single-product-wrap mb-35">
                                 <div class="product-img product-img-zoom mb-15">
                                     <a th:href="@{'/shoes/detail/' + ${shoes.id}}">
@@ -212,73 +174,54 @@
                                         <span th:text="'$' + ${shoes.price}"></span>
                                     </div>
                                     <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                        <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                            <input type="hidden" name="shoesId" id="shoesId" th:value="${shoes.id}">
+                                            <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoe to the cart?')">
+                                                Add to cart
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div id="product-2" class="tab-pane">
-                    <div class="row" th:each="category : ${categories}" th:if="${category.name == 'Running'}">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoess : ${category.shoes}">
-                            <div class="single-product-wrap mb-35">
-                                <div class="product-img product-img-zoom mb-15">
-                                    <a th:href="@{'/shoes/detail/' + ${shoess.id}}">
-                                        <img alt="" th:src="@{${shoess.photosImagePath}}" width="270" height="324">
-                                    </a>
-                                </div>
-                                <div class="product-content-wrap-2 text-center">
-                                    <h3><a th:href="@{'/shoes/detail/' + ${shoess.id}}"
-                                           th:text="${shoess.name}"></a></h3>
-                                    <div class="product-price-2">
-                                        <span th:text="'$' + ${shoess.price}"></span>
+                <th:block th:each="category : ${categories}">
+                    <div th:id="'product-' + ${category.id}" class="tab-pane">
+                        <div class="row">
+                            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoes, iterStat : ${category.shoes}" th:if="${iterStat.count} &lt;= 12">
+                                <!-- Shoe Card HTML -->
+                                <div class="single-product-wrap mb-35">
+                                    <div class="product-img product-img-zoom mb-15">
+                                        <a th:href="@{'/shoes/detail/' + ${shoes.id}}">
+                                            <img alt="" th:src="@{${shoes.photosImagePath}}" width="270" height="324">
+                                        </a>
                                     </div>
-                                </div>
-                                <div class="product-content-wrap-2 product-content-position text-center">
-                                    <h3><a th:href="@{'/shoes/detail/' + ${shoess.id}}"
-                                           th:text="${shoess.name}"></a></h3>
-                                    <div class="product-price-2">
-                                        <span th:text="'$' + ${shoess.price}"></span>
+                                    <div class="product-content-wrap-2 text-center">
+                                        <h3><a th:href="@{'/shoes/detail/' + ${shoes.id}}" th:text="${shoes.name}"></a></h3>
+                                        <div class="product-price-2">
+                                            <span th:text="'$' + ${shoes.price}"></span>
+                                        </div>
                                     </div>
-                                    <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="product-3" class="tab-pane">
-                    <div class="row" th:each="category : ${categories}" th:if="${category.name == 'Lifestyle'}">
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoess : ${category.shoes}">
-                            <div class="single-product-wrap mb-35">
-                                <div class="product-img product-img-zoom mb-15">
-                                    <a th:href="@{'/shoes/detail/' + ${shoess.id}}">
-                                        <img alt="" th:src="@{${shoess.photosImagePath}}" width="270" height="324">
-                                    </a>
-                                </div>
-                                <div class="product-content-wrap-2 text-center">
-                                    <h3><a th:href="@{'/shoes/detail/' + ${shoess.id}}"
-                                           th:text="${shoess.name}"></a></h3>
-                                    <div class="product-price-2">
-                                        <span th:text="'$' + ${shoess.price}"></span>
-                                    </div>
-                                </div>
-                                <div class="product-content-wrap-2 product-content-position text-center">
-                                    <h3><a th:href="@{'/shoes/detail/' + ${shoess.id}}"
-                                           th:text="${shoess.name}"></a></h3>
-                                    <div class="product-price-2">
-                                        <span th:text="'$' + ${shoess.price}"></span>
-                                    </div>
-                                    <div class="pro-add-to-cart">
-                                        <button title="Add to Cart">Add To Cart</button>
+                                    <div class="product-content-wrap-2 product-content-position text-center">
+                                        <h3><a th:href="@{'/shoes/detail/' + ${shoes.id}}" th:text="${shoes.name}"></a></h3>
+                                        <div class="product-price-2">
+                                            <span th:text="'$' + ${shoes.price}"></span>
+                                        </div>
+                                        <div class="pro-add-to-cart">
+                                            <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                                <input type="hidden" name="shoesId" id="shoesId" th:value="${shoes.id}">
+                                                <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoe to the cart?')">
+                                                    Add to cart
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </th:block>
             </div>
         </div>
     </div>
@@ -322,5 +265,10 @@
 <script th:src="@{/js/plugins/scrollup.js}"></script>
 <script th:src="@{/js/plugins/ajax-mail.js}"></script>
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submitForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
 </body>
 </html>

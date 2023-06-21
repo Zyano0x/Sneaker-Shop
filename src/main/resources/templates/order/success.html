@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <th:block th:replace="~{layout::header}"></th:block>
-<title>Register Success - Norda Shop</title>
+<title>Payment Success - Norda Shop</title>
 <body>
 <div class="main-wrapper">
   <div class="order-complete-area bg-gray pt-115 pb-120">
     <div class="container">
       <div class="order-complete-title">
         <div class="text-center">
-          <h3>You have signed up successfully!</h3>
-          <p>Please check your email to verify your account.</p>
-          <h4><a th:href="@{/login}">Click here to Login</a></h4>
+          <h1 class="display-1 fw-bold">Thank you.</h1>
+          <p class="lead">
+            Your order has been received.
+          </p>
+          <a href="/" class="btn btn-primary">Back to homepage</a>
         </div>
       </div>
     </div>

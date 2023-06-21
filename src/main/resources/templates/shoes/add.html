@@ -16,6 +16,11 @@
       <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
     </div>
     <div class="col-6 mb-3">
+      <label class="form-label" for="ldescription">Long Description:</label><span class="text-danger">*</span>
+      <textarea class="form-control" placeholder="Enter Long Description" th:field="*{ldescription}" id="ldescription" rows="5" required autofocus></textarea>
+      <span class="text-danger" th:if="${#fields.hasErrors('ldescription')}" th:errors="*{ldescription}"></span>
+    </div>
+    <div class="col-6 mb-3">
       <label class="form-label" for="price">Price:</label><span class="text-danger">*</span>
       <input class="form-control" required type="text" th:field="*{price}" id="price" placeholder="Enter price">
       <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
@@ -37,9 +42,9 @@
     <div class="col-6 mb-3">
       <input type="submit" class="btn btn-primary" value="Save" />
     </div>
+    <br>
+    <a class="btn btn-primary" th:href="@{/shoes}">Back to List</a>
   </form>
-  <br>
-  <button class="btn btn-primary" th:href="@{/shoes}">Back to List</button>
 </div>
 <th:block th:replace="~{layout::footer}"></th:block>
 </body>

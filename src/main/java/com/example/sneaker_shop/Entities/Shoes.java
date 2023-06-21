@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
 
 @Entity
 @Table(name = "shoes")
@@ -17,7 +16,7 @@ public class Shoes {
 
     @Column(name="name")
     @NotEmpty(message = "Name must not be empty")
-    @Size(max = 50,min =1, message = "Name must be less than 50 characters")
+    @Size(max = 255,min = 1, message = "Name must be less than 50 characters")
     private String name;
 
     @Column(name = "price")
@@ -29,6 +28,9 @@ public class Shoes {
 
     @Column(nullable = true)
     private String description;
+
+    @Column(nullable = true)
+    private String ldescription;
 
     @Column(name="deleted",columnDefinition = "boolean default false")
     private boolean deleted;
@@ -89,6 +91,14 @@ public class Shoes {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLdescription() {
+        return ldescription;
+    }
+
+    public void setLdescription(String ldescription) {
+        this.ldescription = ldescription;
     }
 
     public boolean isDeleted() {

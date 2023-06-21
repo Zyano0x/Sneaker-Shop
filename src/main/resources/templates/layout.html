@@ -1,182 +1,222 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="header">
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="robots" content="noindex, follow" />
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Favicon -->
-  <link rel="shortcut icon" type="image/x-icon" th:href="@{../static/favicon.ico}"/>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="robots" content="noindex, follow"/>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" th:href="@{../static/favicon.ico}"/>
 
-  <!-- All CSS is here
-  ============================================ -->
+    <!-- All CSS is here
+    ============================================ -->
 
-  <link rel="stylesheet" th:href="@{/css/vendor/bootstrap.min.css}" />
-  <link rel="stylesheet" th:href="@{/css/vendor/signericafat.css}" />
-  <link rel="stylesheet" th:href="@{/css/vendor/cerebrisans.css}" />
-  <link rel="stylesheet" th:href="@{/css/vendor/simple-line-icons.css}" />
-  <link rel="stylesheet" th:href="@{/css/vendor/elegant.css}" />
-  <link rel="stylesheet" th:href="@{/css/vendor/linear-icon.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/nice-select.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/easyzoom.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/slick.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/animate.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/magnific-popup.css}" />
-  <link rel="stylesheet" th:href="@{/css/plugins/jquery-ui.css}" />
-  <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/vendor/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/vendor/signericafat.css}"/>
+    <link rel="stylesheet" th:href="@{/css/vendor/cerebrisans.css}"/>
+    <link rel="stylesheet" th:href="@{/css/vendor/simple-line-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/css/vendor/elegant.css}"/>
+    <link rel="stylesheet" th:href="@{/css/vendor/linear-icon.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/nice-select.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/easyzoom.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/slick.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/animate.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/magnific-popup.css}"/>
+    <link rel="stylesheet" th:href="@{/css/plugins/jquery-ui.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <title>Norda Shop - 1337 Team</title>
 <body>
 <div class="main-wrapper">
-  <header class="header-area">
-    <div class="container">
-      <div class="header-large-device">
-        <div class="header-top header-top-ptb-2 border-bottom-1">
-          <div class="row align-items-center">
-            <div class="col-xl-4 col-lg-5">
-              <div class="search-wrap-2">
-                <form action="#">
-                  <input placeholder="Type anything & Hit enter" type="text">
-                  <button class="button-search"><i class="icon-magnifier"></i></button>
-                </form>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-2">
-              <div class="logo text-center">
-                <a href="/"><img src="/css/images/logo/logo-2.png" alt="logo"></a>
-              </div>
-            </div>
-            <div class="col-xl-4 col-lg-5">
-              <div class="header-top-right">
-                  <div class="header-login-regi" sec:authorize="isAuthenticated()">
-                    <form th:action="@{/logout}" method="post">
-                      <a href="/logout"><i class="icon-user"></i> Log Out</a>
-                    </form>
-                  </div>
-                  <div class="header-login-regi" sec:authorize="!isAuthenticated()">
-                    <a href="/login"><i class="icon-user"></i> Log In / Register</a>
-                  </div>
-                <div class="header-cart-2">
-                  <a class="cart-active" href="#"><i class="icon-basket-loaded"></i> <span class="black">02</span> $264.50</a>
+    <header class="header-area">
+        <div class="container">
+            <div class="header-large-device">
+                <div class="header-top header-top-ptb-2 border-bottom-1">
+                    <div class="row align-items-center">
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="search-wrap-2">
+                                <form action="#">
+                                    <input placeholder="Type anything & Hit enter" type="text">
+                                    <button class="button-search"><i class="icon-magnifier"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-2">
+                            <div class="logo text-center">
+                                <a href="/"><img src="/css/images/logo/logo-2.png" alt="logo"></a>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-5">
+                            <div class="header-top-right">
+                                <div class="header-login-regi" sec:authorize="isAuthenticated()">
+                                    <form th:action="@{/logout}" method="post">
+                                        <a href="/logout"><i class="icon-user"></i> Log Out</a>
+                                    </form>
+                                </div>
+                                <div class="header-login-regi" sec:authorize="!isAuthenticated()">
+                                    <a href="/login"><i class="icon-user"></i> Log In / Register</a>
+                                </div>
+                                <div class="header-cart-2" th:if="${cart?.cartItems != null}">
+                                    <a class="cart-active" th:href="@{/cart}"><i class="icon-basket-loaded"></i>
+                                        <span class="black" th:if="${cart.cartItems.size() > 0}"
+                                              th:text="${cart.cartItems.size()}"></span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
+                <div class="header-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-12">
+                            <div class="main-menu main-menu-padding-2 main-menu-center main-menu-font-width-400 main-menu-lh-1">
+                                <nav>
+                                    <ul>
+                                        <li><a href="/">HOME </a></li>
+                                        <li><a href="/all">SHOP </a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('isAuthenticated()')}"
+                                            th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
+                                            <a href="/users" sec:authorize="hasAnyAuthority('ADMIN')">USER MANAGE</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('isAuthenticated()')}"
+                                            th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
+                                            <a href="/shoes" sec:authorize="hasAnyAuthority('ADMIN')">SHOES MANAGE</a>
+                                        </li>
+                                        <li th:if="${#authorization.expression('isAuthenticated()')}"
+                                            th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
+                                            <a href="/categories" sec:authorize="hasAnyAuthority('ADMIN')">CATEGORY
+                                                MANAGE</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="header-small-device small-device-ptb-1">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <div class="mobile-logo">
+                            <a href="/">
+                                <img alt="" src="/css/images/logo/logo.png">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="header-action header-action-flex">
+                            <div class="same-style-2">
+                                <a href="#"><i class="icon-user"></i></a>
+                            </div>
+                            <div class="same-style-2 header-cart">
+                                <a class="cart-active" href="#">
+                                    <i class="icon-basket-loaded"></i><span class="pro-count black">02</span>
+                                </a>
+                            </div>
+                            <div class="same-style-2 main-menu-icon">
+                                <a class="mobile-header-button-active" href="#"><i class="icon-menu"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="header-bottom">
-          <div class="row align-items-center">
-            <div class="col-12">
-              <div class="main-menu main-menu-padding-2 main-menu-center main-menu-font-width-400 main-menu-lh-1">
-                <nav>
-                  <ul>
-                    <li><a href="/">HOME </a></li>
-                    <li><a href="/ListShoes">SHOP </a>
+    </header>
+    <div class="sidebar-cart-active" th:fragment="sidebar-cart">
+        <div class="sidebar-cart-all">
+            <a class="cart-close" href="#"><i class="icon_close"></i></a>
+            <div class="cart-content">
+                <h3>Shopping Cart</h3>
+                <ul th:if="${cart.cartItems != null}">
+                    <li class="single-product-cart" th:each="items:${cart.cartItems}">
+                        <div class="cart-img">
+                            <a th:href="@{'/shoes/detail/' + ${items.shoes.id}}"><img
+                                    th:src="@{${items.shoes.photosImagePath}}" alt=""></a>
+                        </div>
+                        <div class="cart-title">
+                            <h4><a th:href="@{'/shoes/detail/' + ${items.shoes.id}}" th:text="${items.shoes.name}"></a>
+                            </h4>
+                            <span th:text="${items.getQuantity()}"></span>
+                            <span> × </span>
+                            <span th:text="'$' + ${items.shoes.price}"></span>
+                        </div>
+                        <div class="cart-delete">
+                            <a th:href="@{/cart/removeFromCart/{id}(id=${items.shoes.getId()})}">×</a>
+                        </div>
                     </li>
-                    <li th:if="${#authorization.expression('isAuthenticated()')}"
-                        th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/users" sec:authorize="hasAnyAuthority('ADMIN')">USER MANAGE</a>
-                    </li>
-                    <li th:if="${#authorization.expression('isAuthenticated()')}"
-                        th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/shoes" sec:authorize="hasAnyAuthority('ADMIN')">SHOES MANAGE</a>
-                    </li>
-                    <li th:if="${#authorization.expression('isAuthenticated()')}"
-                        th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
-                      <a href="/categories" sec:authorize="hasAnyAuthority('ADMIN')">CATEGORY MANAGE</a>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
+                </ul>
+                <div class="cart-total">
+                    <h4>Total: <span th:if="${totalPrice > 0}" th:text="'$' + ${totalPrice}"></span></h4>
+                </div>
+                <div class="cart-checkout-btn">
+                    <a class="btn-hover cart-btn-style" th:href="@{/cart}">view cart</a>
+                    <form id="checkoutForm" th:action="@{/order/submit}" method="post">
+                        <input type="hidden" name="amount" th:value="${totalPrice.longValue()}" />
+                        <a href="#" onclick="submitForm()">Proceed to Checkout</a>
+                    </form>
+
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="header-small-device small-device-ptb-1">
-        <div class="row align-items-center">
-          <div class="col-6">
-            <div class="mobile-logo">
-              <a href="index.html">
-                <img alt="" src="/css/images/logo/logo.png">
-              </a>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="header-action header-action-flex">
-              <div class="same-style-2">
-                <a href="login-register.html"><i class="icon-user"></i></a>
-              </div>
-              <div class="same-style-2 header-cart">
-                <a class="cart-active" href="#">
-                  <i class="icon-basket-loaded"></i><span class="pro-count black">02</span>
-                </a>
-              </div>
-              <div class="same-style-2 main-menu-icon">
-                <a class="mobile-header-button-active" href="#"><i class="icon-menu"></i> </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-  </header>
-  <div th:fragment="content"></div>
-  <footer class="footer-area pt-85 pb-90" th:fragment="footer">
-    <div class="container">
-      <div class="footer-top text-center">
-        <div class="footer-menu footer-menu-mrg footer-menu-hover-border">
-          <nav>
-            <ul>
-              <li><a class="active" href="index.html">home</a></li>
-              <li><a href="/ListShoes">Shop</a></li>
-              <li><a href="shop.html">Product </a></li>
-              <li><a href="contact.html">Contact</a></li>
-              <li><a href="blog.html">Blog.</a></li>
-            </ul>
-          </nav>
+    <div th:fragment="content"></div>
+    <footer class="footer-area pt-85 pb-90" th:fragment="footer">
+        <div class="container">
+            <div class="footer-top text-center">
+                <div class="footer-menu footer-menu-mrg footer-menu-hover-border">
+                    <nav>
+                        <ul>
+                            <li><a class="active" href="/">HOME</a></li>
+                            <li><a href="/all">SHOP</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <div class="footer-middle footer-middle-mrg">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3">
+                        <div class="social-style-3-wrap xs-center">
+                            <span>follow us</span>
+                            <div class="social-style-1">
+                                <a href="#"><i class="icon-social-twitter"></i></a>
+                                <a href="#"><i class="icon-social-facebook"></i></a>
+                                <a href="#"><i class="icon-social-instagram"></i></a>
+                                <a href="#"><i class="icon-social-youtube"></i></a>
+                                <a href="#"><i class="icon-social-pinterest"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="contact-info-wrap-2 text-center">
+                            <div class="footer-logo footer-logo-mrg">
+                                <a href="#"><img src="/css/images/logo/logo.png" alt="logo"></a>
+                            </div>
+                            <p>295 Madison Ave Str, Floor 25th, New York, NY 10010 , USA</p>
+                            <p>(+0024)-877-932-0563</p>
+                            <p>hello@norda.com</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3">
+                        <div class="language-style-2-wrap language-style-2-right">
+                            <span>Language</span>
+                            <div class="language-style-2">
+                                <a href="#" style="color: black">ENG</a>
+                                <a href="#">FRA</a>
+                                <a href="#">GER</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom copyright text-center">
+                <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by
+                    HasThemes</a>.</p>
+            </div>
         </div>
-      </div>
-      <div class="footer-middle footer-middle-mrg">
-        <div class="row">
-          <div class="col-lg-3 col-md-3">
-            <div class="social-style-3-wrap xs-center">
-              <span>follow us</span>
-              <div class="social-style-1">
-                <a href="#"><i class="icon-social-twitter"></i></a>
-                <a href="#"><i class="icon-social-facebook"></i></a>
-                <a href="#"><i class="icon-social-instagram"></i></a>
-                <a href="#"><i class="icon-social-youtube"></i></a>
-                <a href="#"><i class="icon-social-pinterest"></i></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6">
-            <div class="contact-info-wrap-2 text-center">
-              <div class="footer-logo footer-logo-mrg">
-                <a href="#"><img src="/css/images/logo/logo.png" alt="logo"></a>
-              </div>
-              <p>295 Madison Ave Str, Floor 25th, New York, NY 10010 , USA</p>
-              <p>(+0024)-877-932-0563</p>
-              <p>hello@norda.com</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-3">
-            <div class="language-style-2-wrap language-style-2-right">
-              <span>Language</span>
-              <div class="language-style-2">
-                <a href="#">ENG</a>
-                <a href="#">FRA</a>
-                <a href="#">GER</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom copyright text-center">
-        <p>Copyright © 2020 HasThemes | <a href="https://hasthemes.com/">Built with <span>Norda</span> by HasThemes</a>.</p>
-      </div>
-    </div>
-  </footer>
+    </footer>
 </div>
 
 <!-- All JS is here
@@ -198,11 +238,11 @@
 <script th:src="@{/js/plugins/easyzoom.js}"></script>
 <script th:src="@{/js/plugins/scrollup.js}"></script>
 <script th:src="@{/js/plugins/ajax-mail.js}"></script>
-
-<!-- Use the minified version files listed below for better performance and remove the files listed above
-<script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script>  -->
-<!-- Main JS -->
 <script th:src="@{/js/main.js}"></script>
+<script>
+    function submitForm() {
+        document.getElementById('checkoutForm').submit();
+    }
+</script>
 </body>
 </html>

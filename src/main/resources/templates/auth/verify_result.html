@@ -1,26 +1,57 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:replace="~{layout::header}"></th:block>
+<title>Verify Success - Norda Shop</title>
 <body>
-<div class="container text-center">
-  <div th:if="${error != null}">
-    <h3>
-      <p class="text-danger">[[${error}]]</p>
-    </h3>
+<div class="main-wrapper">
+  <div class="order-complete-area bg-gray pt-115 pb-120">
+    <div class="container">
+      <div class="order-complete-title">
+        <div class="text-center">
+          <div th:if="${error != null}">
+            <h3>
+              <p class="text-danger">[[${error}]]</p>
+            </h3>
+          </div>
+          <div th:if="${message != null}">
+            <h3>
+              <p class="text-warning">[[${message}]]</p>
+            </h3>
+          </div>
+          <h4>
+            <a th:href="@{/login}">Click here to Login</a>
+          </h4>
+        </div>
+      </div>
+    </div>
   </div>
-  <div th:if="${message != null}">
-    <h3>
-      <p class="text-warning">[[${message}]]</p>
-    </h3>
-  </div>
-  <h4>
-    <a th:href="@{/login}">Click here to Login</a>
-  </h4>
-
+  <th:block th:replace="~{layout::footer}"></th:block>
 </div>
 
+<!-- All JS is here
+============================================ -->
+
+<script th:src="@{/js/vendor/modernizr-3.6.0.min.js}"></script>
+<script th:src="@{/js/vendor/jquery-3.5.1.min.js}"></script>
+<script th:src="@{/js/vendor/jquery-migrate-3.3.0.min.js}"></script>
+<script th:src="@{/js/vendor/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/js/plugins/slick.js}"></script>
+<script th:src="@{/js/plugins/jquery.syotimer.min.js}"></script>
+<script th:src="@{/js/plugins/jquery.instagramfeed.min.js}"></script>
+<script th:src="@{/js/plugins/jquery.nice-select.min.js}"></script>
+<script th:src="@{/js/plugins/wow.js}"></script>
+<script th:src="@{/js/plugins/jquery-ui-touch-punch.js}"></script>
+<script th:src="@{/js/plugins/jquery-ui.js}"></script>
+<script th:src="@{/js/plugins/magnific-popup.js}"></script>
+<script th:src="@{/js/plugins/sticky-sidebar.js}"></script>
+<script th:src="@{/js/plugins/easyzoom.js}"></script>
+<script th:src="@{/js/plugins/scrollup.js}"></script>
+<script th:src="@{/js/plugins/ajax-mail.js}"></script>
+
+<!-- Use the minified version files listed below for better performance and remove the files listed above
+<script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script>  -->
+<!-- Main JS -->
+<script th:src="@{/js/main.js}"></script>
 </body>
 </html>
