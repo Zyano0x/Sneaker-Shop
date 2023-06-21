@@ -11,10 +11,18 @@
     <div class="col-md-12">
       <nav class="navbar navbar-light">
         <div class="container-fluid">
-          <form class="d-flex" th:action="@{/users/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
-            Search: <input class="form-control me-2" type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
-            <input class="btn btn-success" type="submit" value="Search"/> &nbsp;
-          </form>
+          <div class="sidebar-widget mb-40">
+            <h4 class="sidebar-widget-title">Search </h4>
+            <div class="sidebar-search">
+              <form class="sidebar-search-form" th:action="@{/users/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
+                <input class="form-control me-2" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
+                <button>
+
+                  <button class="button-search"><i class="icon-magnifier" ></i></button>
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </nav>
     </div>

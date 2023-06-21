@@ -11,10 +11,6 @@
     <div class="col-md-12">
       <nav class="navbar navbar-light">
         <div class="container-fluid">
-          <form class="d-flex" th:action="@{/categories/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
-            Search: <input class="form-control me-2" type="search" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
-            <input class="btn btn-success" type="submit" value="Search"/>
-          </form>
         </div>
       </nav>
     </div>
@@ -34,8 +30,6 @@
       <td>
         <div sec:authorize="hasAnyAuthority('ADMIN')">
           <a class="btn btn-warning" th:href="@{'/categories/edit/' + ${category.id}}">Edit</a>
-        </div>
-        <div sec:authorize="hasAuthority('ADMIN')">
           <a class="btn btn-danger" th:href="@{'/categories/delete/' + ${category.id}}">Delete</a>
         </div>
       </td>

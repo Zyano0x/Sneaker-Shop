@@ -54,11 +54,11 @@
                         <div class="shop-topbar-left">
                             <div class="view-mode nav">
                                 <a class="active" href="#shop-1" data-toggle="tab"><i class="icon-grid"></i></a>
-                                <a href="#shop-2" data-toggle="tab"><i class="icon-menu"></i></a>
+                               <!-- <a href="#shop-2" data-toggle="tab"><i class="icon-menu"></i></a>-->
                             </div>
-                            <p>Showing 1 - 20 of 30 results </p>
+                            <p>Showing 1 - 20  </p>
                         </div>
-                        <div class="product-sorting-wrapper">
+                        <div class="product-sorting-wrapper" style="display: none">
                             <div class="product-shorting shorting-style">
                                 <label>View :</label>
                                 <select>
@@ -81,15 +81,15 @@
                         <div class="tab-content jump">
                             <div id="shop-1" class="tab-pane active">
                                 <div class="row">
-                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12"  th:each="shoes:${shoes}">
+                                    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoes : ${shoes}">
                                         <div class="single-product-wrap mb-35">
                                             <div class="product-img product-img-zoom mb-15">
                                                 <a href="product-details.html">
                                                     <img alt="" th:src="@{${shoes.photosImagePath}}" th:width="300" th:height="300">
                                                 </a>
-                                                <div class="product-action-2 tooltip-style-2">
+                                             <!--   <div class="product-action-2 tooltip-style-2">
                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
-                                                </div>
+                                                </div>-->
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
 
@@ -121,34 +121,57 @@
                         <div class="sidebar-widget mb-40">
                             <h4 class="sidebar-widget-title">Search </h4>
                             <div class="sidebar-search">
-                                <form class="sidebar-search-form" action="#">
-                                    <input type="text" placeholder="Search here...">
+                                <form class="sidebar-search-form" th:action="@{/ListShoes/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
+                                    <input class="form-control me-2" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
                                     <button>
-                                        <i class="icon-magnifier"></i>
+
+                                        <button class="button-search"><i class="icon-magnifier" ></i></button>
                                     </button>
                                 </form>
                             </div>
                         </div>
+                        <div class="sidebar-widget shop-sidebar-border mb-35 pt-40">
+                            <h4 class="sidebar-widget-title">Categories</h4>
+                            <div class="sidebar-widget shop-catigory">
+                                <ul>
+                                    <li>
+                                        <a th:href="@{/ListShoes/page/1}">All</a>
+                                    </li>
+                                    <li th:each="category : ${categories}">
+                                        <a th:href="@{/ListShoes/page/1(category=${category.id})}" th:text="${category.name}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
 
-                        <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
-                            <h4 class="sidebar-widget-title">Price Filter </h4>
+
+                     <!--   <div class="sidebar-widget shop-sidebar-border mb-40 pt-40">
+                            <h4 class="sidebar-widget-title">Price Filter</h4>
                             <div class="price-filter">
-                                <span>Range:  $100 - $2000 </span>
+                                <span>Range: $100 - $2000</span>
                                 <div id="slider-range"></div>
                                 <div class="price-slider-amount">
                                     <div class="label-input">
                                         <input type="text" id="amount" name="price" placeholder="Add Your Price" />
                                     </div>
-                                    <button type="button">Filter</button>
+                                    <button type="button" onclick="applyPriceFilter()">Filter</button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<nav aria-label="Page navigation example" >
+    <ul  class="pagination justify-content-center pagination-sm" th:each="i : ${#numbers.sequence(1, totalPages)}">
+        <li class="page-item" th:classappend="${currentPage == i} ? 'active'">
+            <a  class="page-link" th:href="@{/ListShoes(pageNo=${i})}" th:text="${i}"></a>
+        </li>
+    </ul>
+</nav>
+<th:block th:replace="~{layout::footer}"></th:block>
 <!-- All JS is here
 ============================================ -->
 

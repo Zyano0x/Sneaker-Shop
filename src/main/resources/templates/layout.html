@@ -73,11 +73,6 @@
                     <li><a href="/">HOME </a></li>
                     <li><a href="/ListShoes">SHOP </a>
                     </li>
-                    <li><a href="#">PAGES </a>
-                    </li>
-                    <li><a href="blog.html">BLOG </a>
-                    </li>
-                    <li><a href="" >CONTACT </a></li>
                     <li th:if="${#authorization.expression('isAuthenticated()')}"
                         th:classappend="${#authorization.expression('hasAuthority(''ADMIN'')')} ? 'admin-menu-item' : ''">
                       <a href="/users" sec:authorize="hasAnyAuthority('ADMIN')">USER MANAGE</a>
