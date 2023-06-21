@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,7 +23,6 @@ public class ShoesService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize);
         return shoesRepository.findAll(pageable);
     }
-
     public  List<Shoes> getAllShoes() {
         return shoesRepository.findAll();
     }
@@ -37,6 +37,7 @@ public class ShoesService {
         return shoesRepository.findWithOutDelete(pageable);
 
     }
+
     public Shoes getShoesById(Long id){
         return  shoesRepository.findById(id).orElse(null);
     }
@@ -48,5 +49,17 @@ public class ShoesService {
     }
     public void updateShoes(Shoes shoes){
         shoesRepository.save(shoes);
+    }
+    public List<Shoes> searchShoes(String keyword) {
+        // Thực hiện logic tìm kiếm dựa trên từ khóa và trả về danh sách kết quả
+        // Ví dụ:
+        List<Shoes> searchResults = new ArrayList<>();
+        List<Shoes> allShoes = getAllShoes();
+        for (Shoes shoes : allShoes) {
+            if (shoes.getName().contains(keyword)) {
+                searchResults.add(shoes);
+            }
+        }
+        return searchResults;
     }
 }
