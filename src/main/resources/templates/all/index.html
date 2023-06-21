@@ -1,18 +1,11 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en" xmlns:th="http://www.thymeleaf.org">
 <th:block th:replace="~{layout::header}"></th:block>
-<title>Sneaker Shop - 1337 Team</title>
+<title>Norda Shop - 1337 Team</title>
 <body>
 <div class="main-wrapper">
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-            </div>
-        </div>
-    </div>
+    <th:block th:replace="~{layout::sidebar-cart}"></th:block>
     <!-- Mobile menu start -->
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="clickalbe-sidebar-wrap">
@@ -43,6 +36,18 @@
                     <a class="pinterest" href="#"><i class="icon-social-pinterest"></i></a>
                     <a class="instagram" href="#"><i class="icon-social-instagram"></i></a>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-area bg-gray">
+        <div class="container">
+            <div class="breadcrumb-content text-center">
+                <ul>
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    <li class="active">Shop </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -84,8 +89,8 @@
                                     <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 col-12" th:each="shoes : ${shoes}">
                                         <div class="single-product-wrap mb-35">
                                             <div class="product-img product-img-zoom mb-15">
-                                                <a href="product-details.html">
-                                                    <img alt="" th:src="@{${shoes.photosImagePath}}" th:width="300" th:height="300">
+                                                <a th:href="@{'/shoes/detail/' + ${shoes.id}}">
+                                                    <img alt="" th:src="@{${shoes.photosImagePath}}" th:width="200px" th:height="250px">
                                                 </a>
                                              <!--   <div class="product-action-2 tooltip-style-2">
                                                     <button title="Wishlist"><i class="icon-heart"></i></button>
@@ -93,19 +98,24 @@
                                             </div>
                                             <div class="product-content-wrap-2 text-center">
 
-                                                <h3><a href="" th:text="${shoes.name}"></a></h3>
+                                                <h3><a th:href="@{'/shoes/detail/' + ${shoes.id}}" th:text="${shoes.name}"></a></h3>
                                                 <div class="product-price-2">
                                                     <span th:text="'$' + ${shoes.price}"></span>
                                                 </div>
                                             </div>
                                             <div class="product-content-wrap-2 product-content-position text-center">
 
-                                                <h3><a href="" th:text="${shoes.name}"></a></h3>
+                                                <h3><a th:href="@{'/shoes/detail/' + ${shoes.id}}" th:text="${shoes.name}"></a></h3>
                                                 <div class="product-price-2">
                                                     <span th:text="'$' + ${shoes.price}"></span>
                                                 </div>
                                                 <div class="pro-add-to-cart">
-                                                    <button title="Add to Cart">Add To Cart</button>
+                                                    <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                                        <input type="hidden" name="shoesId" id="shoesId" th:value="${shoes.getId()}">
+                                                        <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
+                                                            Add to cart
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -121,7 +131,7 @@
                         <div class="sidebar-widget mb-40">
                             <h4 class="sidebar-widget-title">Search </h4>
                             <div class="sidebar-search">
-                                <form class="sidebar-search-form" th:action="@{/templates/all/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
+                                <form class="sidebar-search-form" th:action="@{/all/page/{pageNum}(pageNum=${currentPage}, sortField=${sortField}, sortType=${sortType})}">
                                     <input class="form-control me-2" type="text" name="keyword" id="keyword" size="50" th:value="${keyword}" required/>
                                     <button>
 
@@ -135,10 +145,10 @@
                             <div class="sidebar-widget shop-catigory">
                                 <ul>
                                     <li>
-                                        <a th:href="@{/templates/all/page/1}">All</a>
+                                        <a th:href="@{/all/page/1}">All</a>
                                     </li>
                                     <li th:each="category : ${categories}">
-                                        <a th:href="@{/templates/all/page/1(category=${category.id})}" th:text="${category.name}"></a>
+                                        <a th:href="@{/all/page/1(category=${category.id})}" th:text="${category.name}"></a>
                                     </li>
                                 </ul>
                             </div>
@@ -164,13 +174,20 @@
         </div>
     </div>
 </div>
-<nav aria-label="Page navigation example" >
-    <ul  class="pagination justify-content-center pagination-sm" th:each="i : ${#numbers.sequence(1, totalPages)}">
-        <li class="page-item" th:classappend="${currentPage == i} ? 'active'">
-            <a  class="page-link" th:href="@{/ListShoes(pageNo=${i})}" th:text="${i}"></a>
+<div class="pro-pagination-style text-center mt-10">
+    <ul>
+        <li th:class="${currentPage == 1} ? 'disabled'">
+            <a class="prev" th:href="${currentPage > 1} ? @{/all(pageNo=${currentPage - 1})} : '#'"><i class="icon-arrow-left"></i></a>
+        </li>
+        <li th:each="i : ${#numbers.sequence(1, totalPages)}">
+            <a class="active" th:if="${currentPage == i}" th:text="${i}" th:href="@{/all(pageNo=${i})}"></a>
+            <a th:unless="${currentPage == i}" th:text="${i}" th:href="@{/all(pageNo=${i})}"></a>
+        </li>
+        <li th:class="${currentPage == totalPages} ? 'disabled'">
+            <a class="next" th:href="${currentPage < totalPages} ? @{/all(pageNo=${currentPage + 1})} : '#'"><i class="icon-arrow-right"></i></a>
         </li>
     </ul>
-</nav>
+</div>
 <th:block th:replace="~{layout::footer}"></th:block>
 <!-- All JS is here
 ============================================ -->

@@ -18,7 +18,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    String[] pathArrayPermitAll = new String[] { "/css/**", "/js/**", "/", "/register", "/login", "/error", "/shoes", "/verify", "/photos/**", "/shoes/detail/**" };
+    String[] pathArrayPermitAll = new String[] { "/css/**", "/js/**", "/", "/register", "/login", "/error", "/verify", "/photos/**", "/shoes/detail/**", "/all/**" };
     String[] pathArrayNew = new String[] { "/shoes/add",  "categories/add" };
     String[] pathArrayUpdate = new String[] { "/shoes/edit/**", "/categories/edit/**", "/users/edit/**" };
     String[] pathArrayDelete = new String[] { "/shoes/delete/**", "/categories/delete/**" };

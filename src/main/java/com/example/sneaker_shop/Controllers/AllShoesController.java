@@ -2,8 +2,10 @@ package com.example.sneaker_shop.Controllers;
 
 import com.example.sneaker_shop.Entities.Category;
 import com.example.sneaker_shop.Entities.Shoes;
+import com.example.sneaker_shop.Services.CartService;
 import com.example.sneaker_shop.Services.CategoryService;
 import com.example.sneaker_shop.Services.ShoesService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -24,14 +26,17 @@ public class AllShoesController {
     private ShoesService shoesService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CartService cartService;
 
     @GetMapping
-    public String viewHomePage(Model model) {
-        return showAllShoes(model, 1, "id", "asc", "", null);
+    public String viewHomePage(Model model, HttpSession session) {
+        return showAllShoes(model, session, 1, "id", "asc", "", null);
     }
 
     @GetMapping("/page/{pageNum}")
     public String showAllShoes(Model model,
+                               HttpSession session,
                                @PathVariable(name = "pageNum") int pageNum,
                                @RequestParam(name = "sortField", required = false) String sortField,
                                @RequestParam(name = "sortType", required = false) String sortType,
@@ -68,6 +73,10 @@ public class AllShoesController {
         model.addAttribute("shoes", listShoes);
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
+
+        model.addAttribute("cart", cartService.getCart(session));
+        model.addAttribute("totalPrice", cartService.getSumPrice(session));
+        model.addAttribute("totalQuantity", cartService.getSumQuantity(session));
         return "all/index";
     }
 
@@ -90,13 +99,4 @@ public class AllShoesController {
         List<Shoes> pageContent = listShoes.subList(startIndex, endIndex);
         return new PageImpl<>(pageContent, PageRequest.of(pageNum - 1, pageSize), totalItems);
     }
- /*   private List<Shoes> filterShoesByPrice(List<Shoes> shoes, double minPrice, double maxPrice) {
-        List<Shoes> filteredShoes = new ArrayList<>();
-        for (Shoes shoe : shoes) {
-            if (shoe.getPrice() >= minPrice && shoe.getPrice() <= maxPrice) {
-                filteredShoes.add(shoe);
-            }
-        }
-        return filteredShoes;
-    }*/
 }

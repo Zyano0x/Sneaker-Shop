@@ -133,47 +133,7 @@
         </div>
     </div>
     <!-- mini cart start -->
-    <div class="sidebar-cart-active">
-        <div class="sidebar-cart-all">
-            <a class="cart-close" href="#"><i class="icon_close"></i></a>
-            <div class="cart-content">
-                <h3>Shopping Cart</h3>
-                <ul>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="assets/images/cart/cart-1.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Simple Black T-Shirt</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                    <li class="single-product-cart">
-                        <div class="cart-img">
-                            <a href="#"><img src="assets/images/cart/cart-2.jpg" alt=""></a>
-                        </div>
-                        <div class="cart-title">
-                            <h4><a href="#">Norda Backpack</a></h4>
-                            <span> 1 × $49.00	</span>
-                        </div>
-                        <div class="cart-delete">
-                            <a href="#">×</a>
-                        </div>
-                    </li>
-                </ul>
-                <div class="cart-total">
-                    <h4>Subtotal: <span>$170.00</span></h4>
-                </div>
-                <div class="cart-checkout-btn">
-                    <a class="btn-hover cart-btn-style" href="cart.html">view cart</a>
-                    <a class="no-mrg btn-hover cart-btn-style" href="checkout.html">checkout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <th:block th:replace="~{layout::sidebar-cart}"></th:block>
     <div class="breadcrumb-area bg-gray">
         <div class="container">
             <div class="breadcrumb-content text-center">
@@ -195,7 +155,7 @@
                             <div class="easyzoom-style">
                                 <div class="easyzoom easyzoom--overlay">
                                     <a th:href="@{${shoes.photosImagePath}}">
-                                        <img th:src="@{${shoes.photosImagePath}}" alt="">
+                                        <img th:src="@{${shoes.photosImagePath}}" alt="" th:width="650px" th:height="500px">
                                     </a>
                                 </div>
                                 <a class="easyzoom-pop-up img-popup" th:href="@{${shoes.photosImagePath}}"><i class="icon-size-fullscreen"></i></a>
@@ -232,12 +192,17 @@
                         </div>
                         <div class="product-details-meta">
                             <ul>
-                                <li><span>Categories:</span> <a href="#" th:text="${shoes.category.name}"></a></li>
+                                <li><span>Categories:</span> <a th:href="@{/all/page/1(category=${shoes.category.id})}" th:text="${shoes.category.name}"></a></li>
                             </ul>
                         </div>
                         <div class="pro-details-action-wrap">
                             <div class="pro-details-add-to-cart">
-                                <a title="Add to Cart" href="#">Add To Cart </a>
+                                <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
+                                    <input type="hidden" name="shoesId" id="shoesId" th:value="${shoes.getId()}">
+                                    <button type="submit" class="btn btn-dark" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
+                                        Add to cart
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -294,7 +259,7 @@
                     <div class="single-product-wrap">
                         <div class="product-img product-img-zoom mb-15" >
                             <a th:href="@{'/shoes/detail/' + ${shoess.id}}">
-                                <img th:src="@{${shoess.photosImagePath}}" alt="">
+                                <img th:src="@{${shoess.photosImagePath}}" alt="" th:width="270px" th:height="324px">
                             </a>
                         </div>
                         <div class="product-content-wrap-2 text-center">

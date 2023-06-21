@@ -5,7 +5,7 @@
 <body>
 <div class="main-wrapper">
     <!-- mini cart start -->
-<!--    <th:block th:replace="~{layout::sidebar-cart}"></th:block>-->
+    <th:block th:replace="~{layout::sidebar-cart}"></th:block>
     <!-- Mobile menu start -->
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="clickalbe-sidebar-wrap">
@@ -208,9 +208,7 @@
                                     </div>
                                     <div class="pro-add-to-cart">
                                         <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
-                                            <input type="hidden" name="id" th:value="${shoess.getId()}">
-                                            <input type="hidden" name="name" th:value="${shoess.getName()}">
-                                            <input type="hidden" name="price" th:value="${shoess.getPrice()}">
+                                            <input type="hidden" name="shoesId" id="shoesId" th:value="${shoess.id}">
                                             <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
                                                 Add to cart
                                             </button>
@@ -245,9 +243,7 @@
                                     </div>
                                     <div class="pro-add-to-cart">
                                         <form th:action="@{/shoes/add-to-cart}" method="post" class="d-inline">
-                                            <input type="hidden" name="id" th:value="${shoess.getId()}">
-                                            <input type="hidden" name="name" th:value="${shoess.getName()}">
-                                            <input type="hidden" name="price" th:value="${shoess.getPrice()}">
+                                            <input type="hidden" name="shoesId" id="shoesId" th:value="${shoess.id}">
                                             <button type="submit" class="btn btn-success" onclick="return confirm('Are you sure you want to add this shoes to cart?')">
                                                 Add to cart
                                             </button>

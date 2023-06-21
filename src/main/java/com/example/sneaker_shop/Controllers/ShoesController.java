@@ -110,10 +110,14 @@ public class ShoesController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detailShoes(@PathVariable("id")Long id, Model model) {
+    public String detailShoes(@PathVariable("id")Long id, Model model, HttpSession session) {
         Shoes shoes = shoesService.getShoesById(id);
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("shoes", shoes);
+
+        model.addAttribute("cart", cartService.getCart(session));
+        model.addAttribute("totalPrice", cartService.getSumPrice(session));
+        model.addAttribute("totalQuantity", cartService.getSumQuantity(session));
         return "shoes/detail";
     }
 

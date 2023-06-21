@@ -55,7 +55,7 @@ public class CartController {
     @GetMapping("/checkout")
     public String checkout(HttpSession session) {
         cartService.saveCart(session);
-        return "order/complete";
+        return "success";
     }
 }
 
