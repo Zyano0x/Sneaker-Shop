@@ -15,7 +15,7 @@ import java.util.List;
 
 @Repository
 public interface IShoesRepository extends JpaRepository<Shoes, Long> {
-    @Query("SELECT b FROM Shoes b WHERE CONCAT(b.name, ' ', b.category.name, ' ', b.price) LIKE %:keyword% AND b.deleted = false")
+    @Query("SELECT b FROM Shoes b WHERE b.name LIKE %:keyword% AND b.deleted = false")
     public Page<Shoes> Search(Pageable page, @Param("keyword")String keyword);
 
     @Query("SELECT b FROM Shoes b WHERE b.deleted = false")
